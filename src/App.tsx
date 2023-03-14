@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import './App.css';
-import CandidateAddForm from "./components/candidate-add-form/candidate-add-form";
+import MainForm from './components/main-form/MainForm';
 
 const inputs = [
   {type: "text", name: "name", id: "name", placeholder: "Имя", label: "Имя", },
@@ -15,12 +15,19 @@ const textareas = [
   {name: "lastProjectDescription", id: "lastProjectDescription", placeholder: "Описание последнего проекта",
     label: "Описание последнего проекта", },
 ]
+const buttons = [
+  { type: 'submit', className: 'save', name: 'Сохранить', id: 1},
+  { type: 'reset', className: 'discard', name: 'Отмена', id: 2},
+]
 
 class App extends Component {
   render() {
     return (
       <div className='app'>
-        <CandidateAddForm inputs={ inputs } textareas={ textareas } />
+        <div className="app-add-form">
+          <h2 className="form-header">Создание анкеты</h2>
+          <MainForm inputs={ inputs } textareas={ textareas } buttons={ buttons }/>
+        </div>
       </div>
     )
   }

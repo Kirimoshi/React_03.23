@@ -1,0 +1,31 @@
+.app-add-form .form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.app-add-form .form input {
+    display: block;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.app-add-form .form input:focus {
+    outline: none;
+    border-color: #22b455;
+    box-shadow: 0 0 5px #22b455;
+}
+.app-add-form .form input[type=date] {
+    color: #ffffff;
+}
+.app-add-form .form input[type=date]::before {
+    content: attr(placeholder);
+    position: absolute;
+    color: #777474;
+}
+.app-add-form .form input[type=date]:focus, .app-add-form .form input[type=date] :valid {
+    color: #666666;
+}
+.app-add-form .form input[type=date]:focus::before, .app-add-form .form input[type=date] :valid::before {
+    content: "";
+}
