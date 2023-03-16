@@ -1,6 +1,5 @@
 import {Component} from "react";
-import './FormTextareaList.Module.css';
-import {Fragment} from "react";
+import FormTextareaItem from "../form-textarea-item/FormTextareaItem";
 
 class FormTextareaList extends Component {
     constructor(props) {
@@ -12,24 +11,13 @@ class FormTextareaList extends Component {
         const { textareas, onChange, state } = this.props;
 
         const textAreaElements = textareas.map((textarea) => {
-            const { id, name, label, placeholder } = textarea;
-            let value = state[name];
-            return (
-                <Fragment key={ `textareaFragment${id}`}>
-                    <label htmlFor={id}>{label}</label>
-                    <textarea
-                        name={ name }
-                        id={ id }
-                        cols="30"
-                        rows="7"
-                        placeholder={ placeholder }
-                        onChange={ (event) => onChange(event) }
-                        required={true}
-                        value={ value }
-                    >
-                    </textarea>
-                </Fragment>
-            )
+            const { id } = textarea;
+            return <FormTextareaItem
+                                key={ id }
+                                textarea={ textarea }
+                                state={ state }
+                                onChange={ (event) => onChange(event) }
+                                />
         })
         return (
             <>

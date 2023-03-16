@@ -1,14 +1,15 @@
 .app {
-    margin: 20px auto 20px auto;
-    max-width: 400px;
+    margin: 20px auto;
+    width: 350px;
 }
-.app-add-form {
+.app-form {
     padding: 25px;
     background-color: #020204;
     border-radius: 4px;
     box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.15);
     color: #22b455;
+    min-width: 350px;
 }
-.app-add-form .form-header {
+.form-header {
     text-align: center;
 }

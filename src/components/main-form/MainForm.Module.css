@@ -1,9 +1,0 @@
-.app-add-form .form {
-    display: flex;
-    flex-direction: column;
-}
-.app-add-form .form .btn-group {
-    display: flex;
-    justify-content: flex-end;
-    column-gap: 10px;
-}

@@ -1,5 +1,5 @@
 import {Component} from "react";
-import './FormButtonList.Module.css';
+import styles from './FormButtonList.module.css';
 
 class FormButtonList extends Component {
     constructor(props) {
@@ -13,14 +13,14 @@ class FormButtonList extends Component {
             const { type, className, name, id } = button;
             return (
                 <button type={ type }
-                        className={ className }
+                        className={ styles[className] }
                         key={ id }>{ name }</button>
             )
         })
         return (
-            <>
+            <div className={ styles.btnGroup }>
                 { buttonElements }
-            </>
+            </div>
         )
     }
 }

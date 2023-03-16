@@ -1,6 +1,5 @@
 import {Component} from "react";
-import './FormInputList.Module.css';
-import {Fragment} from "react";
+import FormInputItem from "../form-input-item/FormInputItem";
 
 class FormInputList extends Component {
     constructor(props) {
@@ -11,23 +10,13 @@ class FormInputList extends Component {
         const { inputs, onChange, state } = this.props;
 
         const inputElements = inputs.map((input) => {
-            const { id, name, placeholder, type, label } = input;
-            let value = state[name];
-            return (
-                <Fragment key={ `inputFragment${id}` }>
-                    <label htmlFor={id}>{label}</label>
-                    <input
-                        type={type}
-                        name={ name }
-                        id={ id }
-                        placeholder={ placeholder }
-                        aria-labelledby={ id }
-                        onChange={ (event) => onChange(event) }
-                        required={true}
-                        value={ value }
-                    />
-                </Fragment>
-            )
+            const { id } = input;
+            return <FormInputItem
+                            key={ id }
+                            input={ input }
+                            state={ state }
+                            onChange={ onChange }
+                            />
         });
 
         return (

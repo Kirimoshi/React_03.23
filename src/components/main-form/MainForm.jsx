@@ -1,8 +1,8 @@
-import {Component, Fragment} from "react";
+import {Component} from "react";
 import FormInputList from "../form-input-list/FormInputList";
 import FormTextareaList from "../form-textarea-list/FormTextareaList";
 import FormButtonList from "../form-button-list/FormButtonList";
-import './MainForm.Module.css';
+import styles from './MainForm.module.css';
 
 const INITIAL_STATE = {
     name: '',
@@ -24,9 +24,6 @@ class MainForm extends Component {
     }
 
     onValueChange = (event) => {
-        if (event.target.name === 'dateOfBirth') {
-            event.target.setAttribute('placeholder', `${event.target.value}`)
-        }
         this.setState({
             [event.target.name]: event.target.value,
         })
@@ -35,8 +32,18 @@ class MainForm extends Component {
         event.preventDefault();
         const { name, surname, dateOfBirth, phoneNumber, websiteURL, about, techStack, lastProjectDescription } =
             this.state;
+
+        Object.entries(this.state).forEach(([key, value]) => {
+            /*if (value.length === 0) {
+
+            }*/
+            this.setState({
+                [key]: value.trim(),
+            })
+        })
+
         console.log(`
-        Name: ${name}    
+        Name: ${name}
         Surname: ${surname}
         Date of birth: ${dateOfBirth}
         Phone number: ${phoneNumber}
@@ -52,14 +59,12 @@ class MainForm extends Component {
 
         return (
             <form
-                className="form"
+                className={ styles.form }
                 action="#"
                 onSubmit={ this.onSubmitForm }>
-                <FormInputList inputs={ inputs } onChange={ this.onValueChange } state={ state }/>
-                <FormTextareaList textareas={ textareas } onChange={ this.onValueChange } state={ state }/>
-                <div className="btn-group">
+                    <FormInputList inputs={ inputs } onChange={ this.onValueChange } state={ state }/>
+                    <FormTextareaList textareas={ textareas } onChange={ this.onValueChange } state={ state }/>
                     <FormButtonList buttons={ buttons }/>
-                </div>
             </form>
         )
     }
