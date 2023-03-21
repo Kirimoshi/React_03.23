@@ -27,8 +27,11 @@ class App extends Component {
     return (
       <div className='app'>
         <div className="app-form">
-          <h2 className="form-header">Создание анкеты</h2>
-          <MainForm inputs={ inputs } textareas={ textareas } buttons={ buttons }/>
+          <MainForm
+              inputs={ inputs }
+              textareas={ textareas }
+              buttons={ buttons }
+              />
         </div>
       </div>
     )
