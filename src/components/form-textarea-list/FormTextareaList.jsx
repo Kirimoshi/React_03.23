@@ -1,0 +1,30 @@
+import {Component} from "react";
+import FormTextareaItem from "../form-textarea-item/FormTextareaItem";
+
+class FormTextareaList extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+
+    render() {
+        const { textareas, onChange, state } = this.props;
+
+        const textAreaElements = textareas.map((textarea) => {
+            const { id } = textarea;
+            return <FormTextareaItem
+                                key={ id }
+                                textarea={ textarea }
+                                state={ state }
+                                onChange={ (event) => onChange(event) }
+                                />
+        })
+        return (
+            <>
+                { textAreaElements }
+            </>
+        )
+    }
+}
+
+export default FormTextareaList;
