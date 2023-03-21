@@ -2,10 +2,6 @@ import {Component} from "react";
 import styles from './FormInputItem.module.css';
 
 class FormInputItem extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   onInputChange = (event) => {
     this.selectCheckType(event);
     const { onChange } = this.props;

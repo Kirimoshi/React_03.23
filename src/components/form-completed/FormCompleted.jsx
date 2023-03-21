@@ -1,10 +1,7 @@
 import {Component} from "react";
 import styles from "./FormCompleted.module.css";
 
-
 class FormCompleted extends Component {
-
-
     render() {
         const { name, surname, dateOfBirth, phoneNumber, websiteURL, about, techStack,
             lastProjectDescription, } = this.props.state;
@@ -20,7 +17,7 @@ class FormCompleted extends Component {
                 <p><span>Телефон:</span> { phoneNumber }</p>
                 <p>
                   <span>Сайт: </span>
-                  <a href={ websiteURL } target='_blank'>{ websiteURL }</a>
+                  <a href={ websiteURL } target="_blank" rel="noreferrer">{ websiteURL }</a>
                 </p>
                 <p><span>О себе:</span> { about }</p>
                 <p><span>Стек технологий:</span> { techStack }</p>

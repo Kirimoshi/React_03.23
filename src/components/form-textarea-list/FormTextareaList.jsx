@@ -2,11 +2,6 @@ import {Component} from "react";
 import FormTextareaItem from "../form-textarea-item/FormTextareaItem";
 
 class FormTextareaList extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-
     render() {
         const { textareas, onChange, onUpdateShowErrors, state } = this.props;
 

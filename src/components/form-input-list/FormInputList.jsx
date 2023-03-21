@@ -2,10 +2,6 @@ import {Component} from "react";
 import FormInputItem from "../form-input-item/FormInputItem";
 
 class FormInputList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { inputs, onChange, onUpdateShowErrors, state } = this.props;
 

@@ -2,10 +2,6 @@ import {Component} from "react";
 import styles from './FormButtonList.module.css';
 
 class FormButtonList extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const { buttons, onSave, onDiscard } = this.props;
 

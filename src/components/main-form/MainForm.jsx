@@ -2,8 +2,8 @@ import {Component} from "react";
 import FormInputList from "../form-input-list/FormInputList";
 import FormTextareaList from "../form-textarea-list/FormTextareaList";
 import FormButtonList from "../form-button-list/FormButtonList";
-import styles from './MainForm.module.css';
 import FormCompleted from "../form-completed/FormCompleted";
+import styles from './MainForm.module.css';
 
 const INITIAL_STATE = {
   name: '',
@@ -24,9 +24,6 @@ const INITIAL_STATE = {
 }
 
 class MainForm extends Component {
-  constructor(props) {
-    super(props);
-  }
   state = {
     ...INITIAL_STATE,
   }
@@ -36,7 +33,6 @@ class MainForm extends Component {
       [event.target.name]: event.target.value,
     })
   }
-
   updateShowErrors = (type) => {
     switch (type) {
       case 'name':
@@ -132,9 +128,8 @@ class MainForm extends Component {
   }
   onSubmitForm = (event) => {
     event.preventDefault();
-    const { name, surname, dateOfBirth, phoneNumber, websiteURL, about, techStack, lastProjectDescription,
-      showEmptyFieldError, showNameError, showSurnameError, showSiteError, showPhoneError, showTextAreaCounterError } =
-      this.state;
+    const { showEmptyFieldError, showNameError, showSurnameError, showSiteError, showPhoneError,
+      showTextAreaCounterError } = this.state;
 
     Object.entries(this.state).forEach(([key, value]) => {
       if (typeof value === 'string') {

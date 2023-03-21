@@ -1,6 +1,6 @@
 import {Component} from 'react';
-import './App.css';
 import MainForm from './components/main-form/MainForm';
+import './App.css';
 
 const inputs = [
   {type: "text", name: "name", id: "name", placeholder: "Имя", label: "Имя", required: true, },

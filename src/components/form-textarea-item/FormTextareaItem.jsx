@@ -2,9 +2,6 @@ import {Component} from "react";
 import styles from './FormTextareaItem.module.css';
 
 class FormTextareaItem extends Component {
-    constructor(props) {
-        super(props);
-    }
     state = {
         symbolCounter: this.props.textarea.maxLength,
     }
@@ -15,6 +12,7 @@ class FormTextareaItem extends Component {
         this.setState({
             symbolCounter: maxLength - event.target.value.length,
         })
+
         onChange(event);
 
         event.target.value.length > maxLength ?
@@ -63,7 +61,6 @@ class FormTextareaItem extends Component {
             </div>
         )
     }
-
 }
 
 export default FormTextareaItem;
