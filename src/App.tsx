@@ -1,6 +1,6 @@
 import {Component} from 'react';
-import './App.css';
 import MainForm from './components/main-form/MainForm';
+import './App.css';
 
 const inputs = [
   {type: "text", name: "name", id: "name", placeholder: "Имя", label: "Имя", required: true, },
@@ -27,8 +27,11 @@ class App extends Component {
     return (
       <div className='app'>
         <div className="app-form">
-          <h2 className="form-header">Создание анкеты</h2>
-          <MainForm inputs={ inputs } textareas={ textareas } buttons={ buttons }/>
+          <MainForm
+              inputs={ inputs }
+              textareas={ textareas }
+              buttons={ buttons }
+              />
         </div>
       </div>
     )

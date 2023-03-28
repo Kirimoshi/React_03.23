@@ -1,0 +1,26 @@
+.formCompletedWrapper {
+    color: #22b455;
+    display: flex;
+    flex-direction: column;
+}
+.formHeader {
+    text-align: center;
+}
+.formCompletedWrapper p {
+    color: white;
+}
+.formCompletedWrapper span {
+    font-weight: bold;
+    color: #22b455;
+}
+.button {
+    composes: button from '../form-button-list/FormButtonList.module.css';
+    background-color: #22b455;
+}
+
+.button:hover {
+    background-color: #0051ff;
+}
+
+
+
