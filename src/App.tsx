@@ -1,4 +1,3 @@
-import {Component} from 'react';
 import MainForm from './components/main-form/MainForm';
 import './App.css';
 
@@ -22,20 +21,18 @@ const buttons = [
   { type: 'reset', className: 'discard', name: 'Отмена', id: 2},
 ]
 
-class App extends Component {
-  render() {
-    return (
+const App = () => {
+  return (
       <div className='app'>
         <div className="app-form">
           <MainForm
               inputs={ inputs }
               textareas={ textareas }
               buttons={ buttons }
-              />
+          />
         </div>
       </div>
-    )
-  }
+  );
 }
 
 export default App;

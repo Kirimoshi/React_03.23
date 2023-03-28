@@ -1,177 +1,138 @@
-import {Component} from "react";
 import FormInputList from "../form-input-list/FormInputList";
 import FormTextareaList from "../form-textarea-list/FormTextareaList";
 import FormButtonList from "../form-button-list/FormButtonList";
 import FormCompleted from "../form-completed/FormCompleted";
 import styles from './MainForm.module.css';
+import {useState} from "react";
 
 const INITIAL_STATE = {
-  name: '',
-  surname: '',
-  dateOfBirth: '',
-  phoneNumber: '',
-  websiteURL: '',
-  about: '',
-  techStack: '',
-  lastProjectDescription: '',
-  showEmptyFieldError: false,
-  showNameError: false,
-  showSurnameError: false,
-  showSiteError: false,
-  showPhoneError: false,
-  showTextAreaCounterError: false,
-  isFormSubmitted: false,
+  formValues: {
+    name: '',
+    surname: '',
+    dateOfBirth: '',
+    phoneNumber: '',
+    websiteURL: '',
+    about: '',
+    techStack: '',
+    lastProjectDescription: '',
+  },
+  formErrors: {
+    name: false,
+    surname: false,
+    phoneNumber: false,
+    websiteURL: false,
+    emptyField: false,
+    textAreaCounter: false,
+  },
+  formSubmitted: false,
 }
 
-class MainForm extends Component {
-  state = {
-    ...INITIAL_STATE,
+const MainForm = ({ inputs, textareas, buttons }) => {
+  const [formValues, setFormValues] = useState(INITIAL_STATE.formValues);
+  const [formErrors, setFormErrors] = useState(INITIAL_STATE.formErrors);
+  const [formSubmitted, setFormSubmitted] = useState(INITIAL_STATE.formSubmitted);
+
+  const state = {
+    formValues: { ...formValues },
+    formErrors: { ...formErrors },
+    formSubmitted: formSubmitted,
   }
 
-  onValueChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    })
+  const onValueChange = (event) => {
+    setFormValues({ ...formValues, [event.target.name]: event.target.value, })
   }
-  updateShowErrors = (type) => {
+  const updateErrors = (type) => {
     switch (type) {
-      case 'name':
-        this.setState({
-          showNameError: true,
-        })
-        return;
-      case 'nameFalse':
-        this.setState({
-          showNameError: false,
-        })
-        return;
-      case 'surname':
-        this.setState({
-          showSurnameError: true,
-        })
-        return;
-      case 'surnameFalse':
-        this.setState({
-          showSurnameError: false,
-        })
-        return;
-      case 'websiteURL':
-        this.setState({
-          showSiteError: true,
-        })
-        return;
-      case 'websiteURLFalse':
-        this.setState({
-          showSiteError: false,
-        })
-        return;
-      case 'phoneNumber':
-        this.setState({
-          showPhoneError: true,
-        })
-        return;
-      case 'phoneNumberFalse':
-        this.setState({
-          showPhoneError: false,
-        })
-        return;
-      case 'textareaCounter':
-        this.setState({
-          showTextAreaCounterError: true,
-        })
-        return;
-      case 'textareaCounterFalse':
-        this.setState({
-          showTextAreaCounterError: false,
-        })
-        return;
+      case 'nameErrorTrue':
+        setFormErrors({ ...formErrors, name: true });
+        break;
+      case 'nameErrorFalse':
+        setFormErrors({ ...formErrors, name: false });
+        break;
+      case 'surnameErrorTrue':
+        setFormErrors({ ...formErrors, surname: true });
+        break;
+      case 'surnameErrorFalse':
+        setFormErrors({ ...formErrors, surname: false });
+        break;
+      case 'websiteURLErrorTrue':
+        setFormErrors({ ...formErrors, websiteURL: true });
+        break;
+      case 'websiteURLErrorFalse':
+        setFormErrors({ ...formErrors, websiteURL: false });
+        break;
+      case 'phoneNumberErrorTrue':
+        setFormErrors({ ...formErrors, phoneNumber: true });
+        break;
+      case 'phoneNumberErrorFalse':
+        setFormErrors({ ...formErrors, phoneNumber: false });
+        break;
+      case 'textAreaCounterErrorTrue':
+        setFormErrors({ ...formErrors, textAreaCounter: true });
+        break;
+      case 'textAreaCounterErrorFalse':
+        setFormErrors({ ...formErrors, textAreaCounter: false });
+        break;
       default:
-        return;
+        break;
     }
   }
-  onSaveClick = () => {
-    for (const key in this.state) {
-      if (typeof this.state[key] === 'string' && this.state[key].length === 0) {
-        this.setState({
-          showEmptyFieldError: true,
-        })
+  const onSaveClick = () => {
+    for (const key in state.formValues) {
+      if (state.formValues[key].length === 0) {
+        setFormErrors({ ...formErrors, emptyField: true });
         break;
       } else {
-        this.setState({
-          showEmptyFieldError: false,
-        })
+        setFormErrors({ ...formErrors, emptyField: false });
       }
     }
 
-    Object.values(this.state).forEach((value) => {
-      if (typeof value === 'string' && value.length === 0) {
-        this.setState({
-          showEmptyFieldError: true,
-        })
+    Object.values(state.formValues).forEach((value) => {
+      if (value.length === 0) {
+        setFormErrors({ ...formErrors, emptyField: true });
       }
     })
   }
-  onDiscardClick =() => {
-    this.setState({
-      ...INITIAL_STATE,
-    })
+  const onDiscardClick =() => {
+    setFormValues(INITIAL_STATE.formValues);
+    setFormErrors(INITIAL_STATE.formErrors);
+    setFormSubmitted(INITIAL_STATE.formSubmitted);
   }
-  updateIsFormSubmitted = () => {
-    this.setState({
-      isFormSubmitted: true,
-    })
+  const goToMainForm = () => {
+    setFormSubmitted(false);
   }
-  goToMainForm = () => {
-    this.setState({
-      isFormSubmitted: false,
-    })
-  }
-  onSubmitForm = (event) => {
+  const onSubmitForm = (event) => {
     event.preventDefault();
-    const { showEmptyFieldError, showNameError, showSurnameError, showSiteError, showPhoneError,
-      showTextAreaCounterError } = this.state;
+    const { formValues, formErrors } = state;
 
-    Object.entries(this.state).forEach(([key, value]) => {
-      if (typeof value === 'string') {
-        this.setState({
-          [key]: value.trim(),
-        })
-      }
+    Object.entries(formValues).forEach(([key, value]) => {
+      setFormValues({ ...formValues, [key]: value.trim(), })
     })
 
-    if (!showEmptyFieldError &&
-      !showNameError &&
-      !showSurnameError &&
-      !showSiteError &&
-      !showPhoneError &&
-      !showTextAreaCounterError) {
-      this.updateIsFormSubmitted();
+    if (Object.values(formErrors).every((error) => error === false)) {
+      setFormSubmitted(true);
+    } else {
+      setFormSubmitted(false);
     }
   }
 
-  render() {
-    const { inputs, textareas, buttons } = this.props;
-    const state = this.state;
-    const { isFormSubmitted } = state;
-
-    return (
-      isFormSubmitted ?
-        <FormCompleted state={ state } fns={ [this.goToMainForm, this.onDiscardClick] }/> :
-        <>
+  return (
+    formSubmitted
+      ? <FormCompleted formValues={ formValues } fns={ [goToMainForm, onDiscardClick] }/>
+      : <>
           <h2 className={ styles.formHeader }>Создание анкеты</h2>
           <form
             className={ styles.form }
             action="#"
-            onSubmit={ this.onSubmitForm }>
-            <FormInputList inputs={ inputs } onChange={ this.onValueChange }
-                           onUpdateShowErrors={ this.updateShowErrors } state={ state }/>
-            <FormTextareaList textareas={ textareas } onChange={ this.onValueChange }
-                              onUpdateShowErrors={ this.updateShowErrors } state={ state }/>
-            <FormButtonList buttons={ buttons } onSave={ this.onSaveClick } onDiscard={ this.onDiscardClick }/>
+            onSubmit={ onSubmitForm }>
+            <FormInputList inputs={ inputs } onChange={ onValueChange }
+                           onUpdateErrors={ updateErrors } state={ state }/>
+            <FormTextareaList textareas={ textareas } onChange={ onValueChange }
+                              onUpdateErrors={ updateErrors } state={ state }/>
+            <FormButtonList buttons={ buttons } onSave={ onSaveClick } onDiscard={ onDiscardClick }/>
           </form>
         </>
-    )
-  }
+  )
 }
 
 export default MainForm;
