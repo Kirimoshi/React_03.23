@@ -97,6 +97,8 @@ const MainForm = ({ inputs, textareas, buttons }) => {
     setFormValues(INITIAL_STATE.formValues);
     setFormErrors(INITIAL_STATE.formErrors);
     setFormSubmitted(INITIAL_STATE.formSubmitted);
+    const dateInput = document.getElementById('dateOfBirth');
+    dateInput.setAttribute('placeholder', `Дата рождения (обязательно)`);
   }
   const goToMainForm = () => {
     setFormSubmitted(false);
